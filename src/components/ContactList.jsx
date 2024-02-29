@@ -5,10 +5,21 @@ import PropTypes from "prop-types";
 
 const ContactList = ({ onDeleteContact }) => {
   const contacts = useSelector((state) => state.contacts);
+  const filterText = useSelector((state) => state.filters); // Додавання фільтру
+
+  // Фільтрація контактів на основі тексту фільтра
+  const getFilteredContacts = () => {
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filterText.toLowerCase())
+    );
+  };
+
+  // Використання getFilteredContacts для отримання контактів, які відповідають фільтру
+  const filteredContacts = getFilteredContacts();
 
   return (
     <ul>
-      {contacts.map((contact) => (
+      {filteredContacts.map((contact) => (
         <Contact
           key={contact.id}
           contact={contact}
@@ -20,7 +31,7 @@ const ContactList = ({ onDeleteContact }) => {
 };
 
 ContactList.propTypes = {
-  onDeleteContact: PropTypes.func,
+  onDeleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactList;
