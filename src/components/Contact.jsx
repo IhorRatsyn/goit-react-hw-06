@@ -1,10 +1,17 @@
-// eslint-disable-next-line no-unused-vars
 import React from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../redux/contactsSlice";
 import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 
-const Contact = ({ contact, onDeleteContact }) => {
+const Contact = ({ contact }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteContact(contact.id));
+  };
+
   return (
     <li>
       <div>
@@ -17,14 +24,13 @@ const Contact = ({ contact, onDeleteContact }) => {
           {contact.number}
         </div>
       </div>
-      <button onClick={() => onDeleteContact(contact.id)}>Delete</button>
+      <button onClick={handleDelete}>Delete</button>
     </li>
   );
 };
 
-export default Contact;
-
 Contact.propTypes = {
-  contact: PropTypes.object,
-  onDeleteContact: PropTypes.func,
+  contact: PropTypes.object.isRequired,
 };
+
+export default Contact;
