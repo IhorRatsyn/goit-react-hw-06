@@ -9,7 +9,7 @@ import { changeFilter, selectFilter } from "../redux/filtersSlice";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import SearchBox from "./SearchBox";
-import "./App.css";
+import css from "./App.module.css";
 
 const localStorageKey = "contacts";
 
@@ -48,13 +48,13 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="title">Phonebook</h1>
+    <div className={css.container}>
+      <h1 className={css.title}>Phonebook</h1>
       <ContactForm onSubmit={handleAddContact} />
-      <div className="search-container">
+      <div className={css["search-container"]}>
         <SearchBox onChange={handleFilterChange} />
       </div>
-      <div className="contact-list">
+      <div className={css["contact-list"]}>
         <ContactList
           contacts={getFilteredContacts()}
           onDeleteContact={handleDeleteContact}
