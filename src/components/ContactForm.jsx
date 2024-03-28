@@ -26,6 +26,8 @@ const ContactForm = () => {
     };
     dispatch(addContact(newContact));
     resetForm();
+    dispatch(addContact(newContact));
+    localStorage.setItem("contacts", JSON.stringify([...contacts, newContact]));
   };
 
   return (
@@ -50,7 +52,5 @@ const ContactForm = () => {
     </Formik>
   );
 };
-
-ContactForm.propTypes = {};
 
 export default ContactForm;

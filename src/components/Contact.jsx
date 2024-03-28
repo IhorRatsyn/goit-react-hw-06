@@ -10,7 +10,9 @@ const Contact = ({ contact }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteContact(contact.id));
+    dispatch(deleteContact(id));
+    const updatedContacts = contacts.filter((contact) => contact.id !== id);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts));
   };
 
   return (
